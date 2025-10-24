@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadro Kanban/Scrum - SunHost Floripa</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color: #f4f7f6; color: #333; }
+        .container { max-width: 1200px; margin: auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); }
+        h1, h2, h3 { color: #007bff; border-bottom: 2px solid #eee; padding-bottom: 5px; margin-top: 20px; }
+        .kanban-board { display: flex; overflow-x: auto; gap: 15px; padding: 10px 0; }
+        .kanban-list { flex: 0 0 280px; background-color: #ebecf0; padding: 10px; border-radius: 5px; box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25); }
+        .kanban-list h3 { margin-top: 0; margin-bottom: 10px; font-size: 1.1em; color: #172b4d; border-bottom: none; }
+        .kanban-card { background-color: #fff; padding: 10px; border-radius: 3px; margin-bottom: 8px; box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25); border-left: 5px solid; }
+        .card-title { font-weight: bold; margin-bottom: 5px; font-size: 0.95em; }
+        .card-details { font-size: 0.85em; color: #5e6c84; }
+        .card-priority { display: inline-block; padding: 2px 6px; border-radius: 3px; font-weight: bold; margin-right: 5px; color: #fff; }
+        .priority-red { background-color: #ff5630; } /* Prioritário */
+        .priority-orange { background-color: #ff991f; } /* Próxima Versão */
+        .priority-purple { background-color: #6554c0; } /* Versão Futura */
+        .effort-yellow { background-color: #ffc400; color: #172b4d; } /* Médio */
+        .effort-red { background-color: #ff5630; } /* Alto */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 0.9em; }
+        th { background-color: #f0f0f0; }
+        .checklist { margin-top: 5px; list-style: none; padding-left: 0; }
+        .checklist li { margin-bottom: 3px; color: #5e6c84; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quadro Kanban/Scrum - SunHost Floripa</h1>
+        <p><strong>Modelo:</strong> Kanban/Scrum v1.2 | <strong>Responsável:</strong> Product Owner & Stakeholders</p>
+
+        <h2>Estrutura do Quadro (Listas)</h2>
+        <div class="kanban-board">
+            <div class="kanban-list"><h3>BACKLOG</h3><div id="backlog-cards"></div></div>
+            <div class="kanban-list"><h3>SPRINT BACKLOG</h3><div id="sprint-backlog-cards"></div></div>
+            <div class="kanban-list"><h3>TO DO ANÁLISE DE REQUISITOS</h3><div id="analise-cards"></div></div>
+            <div class="kanban-list"><h3>TO DO</h3><div id="todo-cards"></div></div>
+            <div class="kanban-list"><h3>SPRINT REVIEW</h3><div id="review-cards"></div></div>
+            <div class="kanban-list"><h3>IMPEDIMENTOS</h3><div id="impedimentos-cards"></div></div>
+            <div class="kanban-list"><h3>PRONTOS</h3><div id="prontos-cards"></div></div>
+        </div>
+
+        <h2>Cartões Detalhados e Priorização (Simulação PO/Stakeholder)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Título (User Story)</th>
+                    <th>Prioridade</th>
+                    <th>Esforço</th>
+                    <th>Sprint</th>
+                    <th>Status Atual</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>US-1</td>
+                    <td>Cadastro de Anfitrião/Hóspede</td>
+                    <td><span class="card-priority priority-red">Prioritário</span></td>
+                    <td><span class="card-priority effort-yellow">Médio</span></td>
+                    <td>Sprint 1</td>
+                    <td>SPRINT BACKLOG</td>
+                </tr>
+                <tr>
+                    <td>US-2</td>
+                    <td>Listagem de Imóveis</td>
+                    <td><span class="card-priority priority-red">Prioritário</span></td>
+                    <td><span class="card-priority effort-yellow">Médio</span></td>
+                    <td>Sprint 1</td>
+                    <td>SPRINT BACKLOG</td>
+                </tr>
+                <tr>
+                    <td>US-3</td>
+                    <td>Sistema de Reserva</td>
+                    <td><span class="card-priority priority-red">Prioritário</span></td>
+                    <td><span class="card-priority effort-yellow">Médio</span></td>
+                    <td>Sprint 1</td>
+                    <td>SPRINT BACKLOG</td>
+                </tr>
+                <tr>
+                    <td>US-5</td>
+                    <td>Filtros de Busca</td>
+                    <td><span class="card-priority priority-red">Prioritário</span></td>
+                    <td><span class="card-priority effort-yellow">Médio</span></td>
+                    <td>Sprint 1</td>
+                    <td>SPRINT BACKLOG</td>
+                </tr>
+                <tr>
+                    <td>US-7</td>
+                    <td>Notificações e Alertas</td>
+                    <td><span class="card-priority priority-orange">Próxima Versão</span></td>
+                    <td><span class="card-priority effort-yellow">Médio</span></td>
+                    <td>Sprint 2</td>
+                    <td>SPRINT BACKLOG</td>
+                </tr>
+                <tr>
+                    <td>US-6</td>
+                    <td>Painel Administrativo</td>
+                    <td><span class="card-priority priority-orange">Próxima Versão</span></td>
+                    <td><span class="card-priority effort-red">Alto</span></td>
+                    <td>Sprint 2</td>
+                    <td>BACKLOG</td>
+                </tr>
+                <tr>
+                    <td>US-4</td>
+                    <td>Sistema de Avaliação e Review</td>
+                    <td><span class="card-priority priority-purple">Versão Futura</span></td>
+                    <td><span class="card-priority effort-yellow">Médio</span></td>
+                    <td>Sprint 3</td>
+                    <td>BACKLOG</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Detalhe dos Cartões em SPRINT BACKLOG</h3>
+        <div id="card-details">
+            <!-- US-1 -->
+            <div class="kanban-card" style="border-left-color: #ff5630;">
+                <div class="card-title">US-1: Cadastro de Anfitrião/Hóspede</div>
+                <div class="card-details">
+                    <span class="card-priority priority-red">Prioritário</span>
+                    <span class="card-priority effort-yellow">Médio</span> | Sprint 1
+                    <p><strong>Descrição:</strong> Como Anfitrião ou Turista, eu quero me cadastrar na plataforma SunHost Floripa para criar meu perfil e começar a usar os serviços.</p>
+                    <strong>Atividades Estratificadas:</strong>
+                    <ul class="checklist">
+                        <li>[ ] Design da tela de cadastro (Web & Mobile)</li>
+                        <li>[ ] Desenvolvimento do formulário (Frontend)</li>
+                        <li>[ ] Integração com banco de dados (Backend)</li>
+                        <li>[ ] Testes unitários (QA)</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- US-2 -->
+            <div class="kanban-card" style="border-left-color: #ff5630;">
+                <div class="card-title">US-2: Listagem de Imóveis</div>
+                <div class="card-details">
+                    <span class="card-priority priority-red">Prioritário</span>
+                    <span class="card-priority effort-yellow">Médio</span> | Sprint 1
+                    <p><strong>Descrição:</strong> Como Anfitrião, eu quero listar meus imóveis na plataforma SunHost Floripa para que turistas possam encontrá-los e reservá-los.</p>
+                    <strong>Atividades Estratificadas:</strong>
+                    <ul class="checklist">
+                        <li>[ ] Design da seção "Meus Imóveis"</li>
+                        <li>[ ] Desenvolvimento do formulário de cadastro de imóvel</li>
+                        <li>[ ] Upload e armazenamento de fotos</li>
+                        <li>[ ] Testes de integração (QA)</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- US-3 -->
+            <div class="kanban-card" style="border-left-color: #ff5630;">
+                <div class="card-title">US-3: Sistema de Reserva</div>
+                <div class="card-details">
+                    <span class="card-priority priority-red">Prioritário</span>
+                    <span class="card-priority effort-yellow">Médio</span> | Sprint 1
+                    <p><strong>Descrição:</strong> Como Turista Consciente, eu quero fazer uma reserva de acomodação selecionando as datas desejadas para confirmar minha estadia.</p>
+                    <strong>Atividades Estratificadas:</strong>
+                    <ul class="checklist">
+                        <li>[ ] Design do calendário de disponibilidade</li>
+                        <li>[ ] Desenvolvimento da tela de revisão de reserva</li>
+                        <li>[ ] Lógica de bloqueio de datas (Backend)</li>
+                        <li>[ ] Testes de carga (QA)</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- US-5 -->
+            <div class="kanban-card" style="border-left-color: #ff5630;">
+                <div class="card-title">US-5: Filtros de Busca</div>
+                <div class="card-details">
+                    <span class="card-priority priority-red">Prioritário</span>
+                    <span class="card-priority effort-yellow">Médio</span> | Sprint 1
+                    <p><strong>Descrição:</strong> Como Turista Consciente, eu quero filtrar acomodações por datas, preço, tipo de imóvel e comodidades para encontrar a opção ideal para minha estadia.</p>
+                    <strong>Atividades Estratificadas:</strong>
+                    <ul class="checklist">
+                        <li>[ ] Design da interface de filtros</li>
+                        <li>[ ] Implementação de busca em tempo real</li>
+                        <li>[ ] Otimização de queries de banco de dados</li>
+                        <li>[ ] Testes de performance (QA)</li>
+                    </ul>
+                </div>
+            </div>
+            <!-- US-7 -->
+            <div class="kanban-card" style="border-left-color: #ff991f;">
+                <div class="card-title">US-7: Notificações e Alertas</div>
+                <div class="card-details">
+                    <span class="card-priority priority-orange">Próxima Versão</span>
+                    <span class="card-priority effort-yellow">Médio</span> | Sprint 2
+                    <p><strong>Descrição:</strong> Como Anfitrião ou Turista, eu quero receber notificações em tempo real sobre solicitações de reserva, confirmações, cancelamentos e mensagens para manter-me informado.</p>
+                    <strong>Atividades Estratificadas:</strong>
+                    <ul class="checklist">
+                        <li>[ ] Design do sistema de notificações (Arquitetura)</li>
+                        <li>[ ] Desenvolvimento de serviço de notificações (Backend)</li>
+                        <li>[ ] Implementação de push notifications</li>
+                        <li>[ ] Testes unitários (QA)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <p style="margin-top: 30px; font-size: 0.8em; text-align: center; color: #888;">Este quadro simula o layout e o conteúdo de uma ferramenta Kanban (como Notion ou GitHub Projects), contendo todas as informações e priorizações solicitadas.</p>
+    </div>
+</body>
+</html>

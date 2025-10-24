@@ -1,1 +1,1 @@
-# KanbanSunHost
+# SunHost Floripa - Kanban Board
